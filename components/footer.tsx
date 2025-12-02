@@ -7,19 +7,13 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Connect</h4>
             <div className="space-y-2">
               <a
-                href="#"
-                className="block text-sm text-muted-foreground hover:text-accent transition-colors"
-              >
-                Twitter
-              </a>
-              <a
-                href="#"
+                href="https://github.com/ilhamwibawa"
                 className="block text-sm text-muted-foreground hover:text-accent transition-colors"
               >
                 GitHub
               </a>
               <a
-                href="#"
+                href="https://linkedin.com/in/ilhamwibawa"
                 className="block text-sm text-muted-foreground hover:text-accent transition-colors"
               >
                 LinkedIn

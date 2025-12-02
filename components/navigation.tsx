@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +35,15 @@ export function Navigation() {
             className="text-sm hover:text-primary/80 transition-colors"
           >
             Blog
+          </Link>
+
+          <Link
+            href="https://github.com/ilhamwibawa/blog"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm hover:text-primary/80 transition-colors"
+          >
+            <SiGithub />
           </Link>
         </div>
 
