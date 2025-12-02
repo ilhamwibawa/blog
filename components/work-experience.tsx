@@ -134,7 +134,7 @@ const experiences: Experience[] = [
 
 export function WorkExperience() {
   return (
-    <section id="work" className="py-16 px-6 md:py-24 bg-muted/30">
+    <section id="work" className="py-16 px-6 md:py-24">
       <div className="max-w-4xl mx-auto">
         <div className="mb-12 md:mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

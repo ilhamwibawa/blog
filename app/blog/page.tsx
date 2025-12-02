@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 
@@ -11,27 +11,38 @@ interface BlogPost {
   excerpt: string;
   date: string;
   tags: string[];
-  content: string;
+  readTime: number;
 }
 
-const blogPosts: BlogPost[] = [];
-
 export default function BlogPage() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch blog posts from API route
+    fetch("/api/blog")
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogPosts(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   const allTags = useMemo(() => {
     const tags = new Set<string>();
     blogPosts.forEach((post) => post.tags.forEach((tag) => tags.add(tag)));
     return Array.from(tags).sort();
-  }, []);
+  }, [blogPosts]);
 
   const filteredPosts = useMemo(() => {
     if (!selectedTag) return blogPosts;
     return blogPosts.filter((post) => post.tags.includes(selectedTag));
-  }, [selectedTag]);
+  }, [selectedTag, blogPosts]);
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen">
       <Navigation />
 
       <section className="py-20 px-6 md:py-32">
@@ -72,7 +83,11 @@ export default function BlogPage() {
           </div>
 
           {/* Blog Posts List */}
-          {blogPosts.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Loading posts...</p>
+            </div>
+          ) : blogPosts.length === 0 ? (
             <div className="border border-dashed border-border rounded-lg p-16 text-center">
               <div className="max-w-md mx-auto">
                 <h2 className="text-2xl font-bold mb-3">
@@ -96,7 +111,7 @@ export default function BlogPage() {
                     className="border-b border-border pb-12 last:border-b-0"
                   >
                     <Link href={`/blog/${post.slug}`} className="group">
-                      <h2 className="text-3xl font-bold mb-3 group-hover:text-accent transition-colors">
+                      <h2 className="text-3xl font-bold mb-3 group-hover:text-foreground/50 transition-colors">
                         {post.title}
                       </h2>
                     </Link>

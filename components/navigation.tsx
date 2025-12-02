@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-      <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-4xl mx-auto px-6 md:px-0 py-4 flex items-center justify-between">
         <Link
           href="/"
           className="text-lg font-semibold hover:text-primary/80 transition-colors"
@@ -20,27 +19,25 @@ export function Navigation() {
         <div className="hidden md:flex gap-8 items-center">
           <Link
             href="#work"
-            className="text-sm hover:text-accent transition-colors"
+            className="text-sm hover:text-primary/80 transition-colors"
           >
             Work
           </Link>
           <Link
             href="#projects"
-            className="text-sm hover:text-accent transition-colors"
+            className="text-sm hover:text-primary/80 transition-colors"
           >
             Projects
           </Link>
           <Link
             href="/blog"
-            className="text-sm hover:text-accent transition-colors"
+            className="text-sm hover:text-primary/80 transition-colors"
           >
             Blog
           </Link>
-          <ThemeToggle />
         </div>
 
         <div className="md:hidden flex items-center gap-4">
-          <ThemeToggle />
           <button
             className="p-2"
             onClick={() => setIsOpen(!isOpen)}

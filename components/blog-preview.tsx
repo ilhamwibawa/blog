@@ -1,44 +1,12 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  tags: string[];
-}
-
-const recentPosts: BlogPost[] = [
-  {
-    slug: "building-scalable-systems",
-    title: "Building Scalable Systems: Lessons from the Trenches",
-    excerpt:
-      "Thoughts on how to build systems that don't crumble when you least expect it. Covering architecture decisions, monitoring, and debugging in production.",
-    date: "Dec 1, 2024",
-    tags: ["architecture", "backend", "systems"],
-  },
-  {
-    slug: "debugging-typescript",
-    title: "Debugging TypeScript: Tips I Wish I Knew Earlier",
-    excerpt:
-      "A practical guide to debugging TypeScript applications. We'll cover common gotchas, useful tools, and mental models that make debugging easier.",
-    date: "Nov 24, 2024",
-    tags: ["typescript", "debugging", "frontend"],
-  },
-  {
-    slug: "shipping-fast",
-    title: "The Art of Shipping: How to Move Fast Without Breaking Things",
-    excerpt:
-      "Speed matters, but so does stability. Here's how I think about shipping quickly while maintaining code quality.",
-    date: "Nov 15, 2024",
-    tags: ["productivity", "engineering", "practices"],
-  },
-];
+import { getAllPosts } from "@/lib/mdx";
 
 export function BlogPreview() {
+  const allPosts = getAllPosts();
+  const recentPosts = allPosts.slice(0, 3);
   return (
-    <section className="py-20 px-6 md:py-32 bg-muted/30">
+    <section className="py-20 px-6 md:py-32">
       <div className="max-w-4xl mx-auto">
         <div className="mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Recent Posts</h2>
