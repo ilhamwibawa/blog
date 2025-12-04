@@ -1,0 +1,172 @@
+---
+title: "State Management Is Not Redux: A Clearer Way to Think About Data Flow"
+date: "2025-12-04"
+excerpt: "A practical explanation of modern state management, why not all state belongs in a global store, and how separating server, UI, and global state leads to simpler, more predictable applications."
+slug: "state-management-is-not-redux"
+tags:
+  [
+    "frontend",
+    "react",
+    "state-management",
+    "architecture",
+    "software-engineering",
+    "react-query",
+  ]
+---
+
+Many developers first encounter state management through tools like Redux, and it’s natural to believe that every piece of state belongs in a global store. I used to think the same way. But as applications grow, this approach quickly becomes difficult to maintain.
+
+State becomes tangled, rerenders become unpredictable, and logic that should be simple ends up scattered across reducers and actions. What helped me break out of this pattern was learning to separate state based on how it behaves, not based on where I felt like storing it.
+
+This article shares a clearer, more predictable mental model for managing state — one that relies less on tools and more on understanding the nature of the data itself.
+
+---
+
+## Understanding That Not All State Is the Same
+
+Consider a typical web application. You might fetch a list of items from an API, open a sidebar when a button is clicked, or highlight a selected element. These states behave very differently, even though they often get grouped together.
+
+The turning point came when I started asking myself:
+
+> **"Why am I treating every type of state as if it works the same way?"**
+
+This led me to recognize that there are **three distinct categories of state**, each with its own purpose and ideal place.
+
+Here’s a summary:
+
+| Type of State    | Source / Owner | Characteristics                                          | Ideal Tools                      |
+| ---------------- | -------------- | -------------------------------------------------------- | -------------------------------- |
+| **Server State** | Backend / API  | Can change outside UI control; needs caching and syncing | React Query / TanStack Query     |
+| **UI State**     | Component      | Local, ephemeral, purely visual                          | useState, useReducer, Zustand    |
+| **Global State** | Entire App     | Rare, shared across the whole application                | Zustand, Jotai, Redux (optional) |
+
+With these distinctions in place, state decisions become far more intuitive.
+
+---
+
+## 1. Server State – Data From Outside Your UI
+
+Server state is any data that originates from your backend. Because it can change independently of user actions, managing it directly inside a global store often leads to duplicated logic, manual cache handling, and unnecessary complexity.
+
+Characteristics of server state:
+
+- It comes from an API.
+- The UI does not control when it changes.
+- It often requires caching, background updates, and refetching.
+
+### Common examples:
+
+- Lists of products or users.
+- Notifications or messages.
+- Dashboard metrics.
+- Paginated or infinite scroll data.
+
+Tools like **React Query** exist specifically to simplify this category, offering caching, synchronization, retries, and more — without writing reducers.
+
+---
+
+## 2. UI State – The Visual Behavior of Your Components
+
+UI state affects how the interface behaves. It does not need to be global because it rarely affects other parts of the application.
+
+Typical examples include:
+
+- Whether a modal is open.
+- The selected tab in a panel.
+- Dropdown visibility.
+- Input field content.
+- The active step in a wizard.
+
+UI state works best when it stays local, using tools such as:
+
+- `useState`
+- `useReducer`
+- Zustand (only when a few components need to share it)
+
+Storing UI state globally adds unnecessary complexity without any benefit.
+
+---
+
+## 3. Global State – A Small but Important Category
+
+Global state is the smallest category and should be used sparingly. It represents data that truly needs to be shared across many parts of the application.
+
+This might include:
+
+- The current authenticated user.
+- Theme settings.
+- Localization preferences.
+- Feature flags.
+
+This type of state changes infrequently and benefits from being stored in a lightweight global solution.
+
+---
+
+## Visualizing Modern State Flow
+
+When these categories are applied correctly, the flow of state in an application becomes simpler and clearer.
+
+```
+Server → React Query Cache → Component → Local UI State → Render
+```
+
+And here is how they relate to each other:
+
+<Mermaid
+  chart={`
+flowchart LR
+    A[Server / API] --> B[React Query Cache]
+    B --> C[Components]
+    C --> D[Local UI State]
+    D --> E[Rendered UI]
+    C --> F[Global State]
+    F --> E
+  `}
+/>
+
+### Example setup:
+
+- **Server state** handled by React Query.
+- **Global state** for user authentication.
+- **UI state** for modals and interaction logic.
+
+This structure naturally reduces rerenders, improves clarity, and makes onboarding easier for anyone working on the codebase.
+
+---
+
+## A Common Pitfall: Putting UI State Into Global Stores
+
+It’s very easy to fall into the habit of storing everything in a global state management tool like Redux. But doing so for UI-related data creates unnecessary work and bloated reducers.
+
+Examples of state that should almost never be global:
+
+- `isModalOpen`
+- `isLoading` flags
+- Table filters
+- Tabs and step states
+
+Keeping state close to where it is used results in simpler, more predictable code.
+
+---
+
+## A Simple Guiding Question
+
+Whenever you encounter a new piece of state, ask:
+
+> **"Who owns this state?"**
+
+The answer usually makes the placement obvious:
+
+- If the server owns it, use React Query.
+- If the component owns it, use local state.
+- If the entire application needs it, place it in global state.
+
+This small shift in thinking prevents over-architecting and helps maintain a clean mental model as the application grows.
+
+---
+
+## Closing Thoughts
+
+Adopting this three-category model for state has made my applications easier to maintain, simpler to reason about, and far less error‑prone. The tools matter far less than the understanding of how data behaves.
+
+Before adding any new state, take a moment to consider where it truly belongs. That small pause can make the entire codebase clearer and more enjoyable to work with.
