@@ -1,0 +1,162 @@
+---
+
+title: "Using AI for Coding with TDD: Focus on Requirements, Not Generated Code"
+date: "2025-12-04"
+excerpt: "A practical way to use AI in daily coding by combining it with Test-Driven Development, keeping humans focused on requirements and understanding while AI helps translate intent into tests."
+slug: "using-ai-for-coding-with-tdd"
+tags:
+[
+"ai",
+"tdd",
+"software-engineering",
+"testing",
+"productivity",
+"architecture",
+]
+-
+
+## The Problem with “Just Generate the Code”
+
+AI is great at generating code. Too great, sometimes.
+
+If you’ve ever asked an AI to “implement feature X” and copy-pasted the result, you probably felt productive at first. But a few days later, when a bug appears or a requirement changes, you realize something uncomfortable: you don’t really understand the codebase.
+
+The core issue isn’t AI. It’s how we use it.
+
+When AI directly generates implementation, we tend to skip the most important step in software engineering: deeply understanding the problem and the constraints.
+
+## Flipping the Approach: AI + TDD
+
+Instead of asking AI to write code, I use AI as a test generator, not a solution generator.
+
+The flow looks like this:
+
+1. I focus only on requirements
+2. I ask AI to convert requirements into tests
+3. I implement the code myself to satisfy those tests
+
+This is essentially Test-Driven Development (TDD), with AI acting as a smart assistant that helps formalize requirements.
+
+## Step 1: Obsess Over Requirements
+
+At the beginning, I completely ignore implementation details.
+
+I only care about:
+
+* What should this feature do?
+* What inputs are valid?
+* What edge cases matter?
+* What should never happen?
+
+I write requirements in plain language, almost like acceptance criteria:
+
+* “When the user submits invalid data, the system should return an error”
+* “The total price should include tax, rounded to two decimals”
+* “If the resource does not exist, return a 404”
+
+No classes. No functions. No frameworks. Just behavior.
+
+This step alone already improves code quality, because it forces clarity.
+
+## Step 2: Ask AI to Generate Tests
+
+Once the requirements are clear, then I involve AI.
+
+My prompt is usually something like:
+
+> “Based on these requirements, generate unit tests using X framework.”
+
+At this point, AI shines:
+
+* It’s good at translating natural language into test cases
+* It often catches edge cases I forgot
+* It produces structured, repeatable scenarios
+
+The important rule:
+
+I do not ask AI to implement the solution. Only the tests.
+
+Now I have a test suite that represents my intent.
+
+## Step 3: Implement the Code Yourself
+
+With failing tests in place, I start coding.
+
+This part is fully manual:
+
+* I decide the architecture
+* I name the abstractions
+* I control complexity
+* I understand every line
+
+The tests guide me, but they don’t think for me.
+
+If something feels awkward to implement, that’s a signal:
+
+* The requirement might be unclear
+* The test might be wrong
+* Or the design needs rethinking
+
+This feedback loop is exactly what TDD is meant to provide.
+
+## Why This Works So Well
+
+Using this approach, I’ve noticed a few concrete benefits:
+
+### 1. I’m Faster (Yes, Really)
+
+Even though I’m “writing more tests,” I ship features about 30% faster.
+
+Why?
+
+* Less rework
+* Fewer misunderstandings
+* Fewer regressions
+* Clear stopping point (“all tests pass”)
+
+Speed comes from clarity, not from typing less.
+
+### 2. I Actually Know the Codebase
+
+Because I write the implementation:
+
+* I know where things live
+* I know why decisions were made
+* I know how to change things safely
+
+This is very different from pasting generated code and hoping it works.
+
+### 3. AI Becomes a Teammate, Not a Crutch
+
+In this setup:
+
+* AI helps me think
+* AI challenges my requirements
+* AI accelerates boring parts (test scaffolding)
+
+But ownership stays with me.
+
+I’m still the engineer making decisions.
+
+## This Is Not Anti-AI
+
+To be clear, this approach is not about avoiding AI.
+
+It’s about using AI at the right level of abstraction.
+
+* Humans: intent, requirements, trade-offs, design
+* AI: translation, coverage, repetition, consistency
+
+When those roles are clear, AI becomes a multiplier instead of a liability.
+
+## Closing Thoughts
+
+If you feel that AI-generated code makes you faster today but weaker tomorrow, try this shift:
+
+* Stop asking AI for implementations
+* Start asking AI for tests
+* Let requirements drive everything
+
+You’ll move faster, understand more, and build software that’s easier to change.
+
+And most importantly, you’ll still feel like an engineer — not a copy-paste operator.
