@@ -8,6 +8,14 @@ import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import remarkGfm from "remark-gfm";
 import { Mermaid } from "@/components/mermaid";
+import {
+  Terminal,
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Tag,
+  FileText,
+} from "lucide-react";
 
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
@@ -86,68 +94,76 @@ export default async function BlogPost({
   return (
     <>
       <JsonLd data={jsonLd} />
-      <main className="min-h-screen bg-background text-foreground">
+      <main className="min-h-screen bg-background text-foreground font-mono selection:bg-primary/20">
         <Navigation />
 
-        <article className="py-20 px-6 md:py-32">
+        <article className="py-12 px-4 md:py-20">
           <div className="max-w-4xl mx-auto">
-            {/* Header */}
-            <header className="mb-12 pb-12 border-b border-border">
+            {/* Breadcrumb / Path */}
+            <div className="mb-8 flex items-center gap-2 text-sm text-muted-foreground border-b border-border pb-4">
+              <Terminal className="w-4 h-4" />
+              <Link href="/" className="hover:text-primary transition-colors">
+                ~
+              </Link>
+              <span>/</span>
               <Link
                 href="/blog"
-                className="text-sm text-primary hover:underline mb-6 inline-block"
+                className="hover:text-primary transition-colors"
               >
-                ← Back to all posts
+                blog
               </Link>
+              <span>/</span>
+              <span className="text-foreground font-medium truncate">
+                {post.slug}.md
+              </span>
+            </div>
 
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-balance">
+            {/* Header Block */}
+            <header className="mb-12 bg-muted/30 border border-border rounded-lg p-6 md:p-8">
+              <div className="flex flex-wrap gap-4 mb-6 text-xs text-muted-foreground uppercase tracking-wider font-bold">
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3" />
+                  {post.date}
+                </div>
+                <div className="flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  {post.readTime} min read
+                </div>
+                <div className="flex items-center gap-1">
+                  <FileText className="w-3 h-3" />
+                  Markdown
+                </div>
+              </div>
+
+              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight">
                 {post.title}
               </h1>
 
-              <div className="flex flex-wrap gap-4 items-center text-sm text-muted-foreground">
-                <time>{post.date}</time>
-                <span>•</span>
-                <span>{post.readTime} min read</span>
-                <span>•</span>
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-muted rounded-full text-xs"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded text-xs font-medium flex items-center gap-1"
+                  >
+                    <Tag className="w-3 h-3" />
+                    {tag}
+                  </span>
+                ))}
               </div>
             </header>
 
             {/* MDX Content */}
             <div
               className="
-              prose prose-invert prose-xl max-w-none
-              prose-headings:font-bold prose-headings:tracking-tight prose-h1:text-4xl prose-h1:mb-8
-              prose-h1:mt-12 prose-h2:text-3xl prose-h2:mb-6
-              prose-h2:mt-10 prose-h3:text-2xl prose-h3:mb-4
-              prose-h3:mt-8 prose-p:text-lg prose-p:text-foreground/90
-              prose-p:leading-[1.8] prose-p:mb-6 prose-a:text-accent
-              prose-a:font-medium prose-a:no-underline hover:prose-a:underline
-              prose-a:underline-offset-4 prose-strong:text-foreground prose-strong:font-semibold
-              prose-code:text-foreground prose-code:text-sm prose-code:font-mono
-              prose-code:before:content-[''] prose-code:after:content-['']
-              prose-pre:bg-muted/50 prose-pre:border prose-pre:border-border/50
-              prose-pre:rounded-lg prose-pre:p-6 prose-pre:my-8 prose-ul:text-lg
-              prose-ul:text-foreground/90 prose-ul:leading-[1.8] prose-ul:my-6
-              prose-ul:space-y-3 prose-ol:text-lg prose-ol:text-foreground/90
-              prose-ol:leading-[1.8] prose-ol:my-6 prose-ol:space-y-3 prose-li:my-2
-              prose-li::marker:text-accent/80 prose-blockquote:border-l-4 prose-blockquote:border-accent
-              prose-blockquote:pl-6 prose-blockquote:py-4 prose-blockquote:italic
-              prose-blockquote:text-foreground/80 prose-blockquote:bg-muted/30 prose-blockquote:rounded-r
-              prose-blockquote:my-8 prose-table:w-full prose-table:border-collapse prose-table:my-8
-              prose-th:bg-muted prose-th:px-4 prose-th:py-3 prose-th:text-left
-              prose-th:font-semibold prose-th:text-foreground prose-th:border prose-th:border-border
-              prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-border
-              prose-td:text-foreground/90 prose-tr:border-border
+              prose prose-invert prose-lg max-w-none
+              prose-headings:font-bold prose-headings:tracking-tight prose-headings:font-mono
+              prose-h1:text-3xl prose-h1:border-b prose-h1:border-border prose-h1:pb-2
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
+              prose-p:text-foreground/90 prose-p:leading-relaxed
+              prose-code:text-primary prose-code:bg-muted/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+              prose-pre:bg-card prose-pre:border prose-pre:border-border
+              prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:bg-muted/10 prose-blockquote:not-italic
+              prose-li:marker:text-primary
               "
             >
               <MDXRemote
@@ -163,16 +179,17 @@ export default async function BlogPost({
               />
             </div>
 
-            {/* Footer */}
-            <footer className="mt-16 pt-8 border-t border-border">
-              <div className="flex gap-4">
-                <Link
-                  href="/blog"
-                  className="px-4 py-2 border border-border hover:bg-muted rounded-lg transition-colors text-sm"
-                >
-                  ← Back to blog
-                </Link>
-              </div>
+            {/* Footer / Navigation */}
+            <footer className="mt-16 pt-8 border-t border-border flex justify-between items-center">
+              <Link
+                href="/blog"
+                className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                <span>cd ..</span>
+              </Link>
+
+              <div className="text-xs text-muted-foreground">End of file</div>
             </footer>
           </div>
         </article>

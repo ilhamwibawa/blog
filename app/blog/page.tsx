@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useMemo, useEffect } from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { Terminal, FileText, Filter, Hash } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface BlogPost {
   slug: string;
@@ -20,7 +22,6 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch blog posts from API route
     fetch("/api/blog")
       .then((res) => res.json())
       .then((data) => {
@@ -42,108 +43,125 @@ export default function BlogPage() {
   }, [selectedTag, blogPosts]);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-background font-mono selection:bg-primary/20">
       <Navigation />
 
-      <section className="py-20 px-6 md:py-32">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">Blog</h1>
-            <p className="text-lg text-muted-foreground">
-              Thoughts on engineering, systems, and the craft of building
-              software.
-            </p>
+      <section className="py-12 px-4 md:py-20 max-w-6xl mx-auto">
+        {/* Header Section */}
+        <div className="mb-12 border-b border-border pb-8">
+          <div className="flex items-center gap-2 text-muted-foreground mb-4 text-sm">
+            <Terminal className="w-4 h-4" />
+            <span>/var/www/html/blog</span>
           </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+            <span className="text-primary mr-2">$</span>
+            ls -la ./knowledge_base
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            // A collection of technical articles, system designs, and engineering
+            notes.
+          </p>
+        </div>
 
-          {/* Tag Filter */}
-          <div className="mb-12 flex flex-wrap gap-2">
+        {/* Controls */}
+        <div className="mb-8 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="text-sm text-muted-foreground mr-2 flex items-center gap-1">
+              <Filter className="w-3 h-3" />
+              Filter by tag:
+            </span>
             <button
               onClick={() => setSelectedTag(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-3 py-1 rounded text-xs border transition-all ${
                 selectedTag === null
-                  ? "bg-accent text-accent-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-background border-border hover:border-primary/50 text-muted-foreground"
               }`}
             >
-              All posts
+              *
             </button>
             {allTags.map((tag) => (
               <button
                 key={tag}
                 onClick={() => setSelectedTag(tag)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-3 py-1 rounded text-xs border transition-all flex items-center gap-1 ${
                   selectedTag === tag
-                    ? "bg-accent text-accent-foreground"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-background border-border hover:border-primary/50 text-muted-foreground"
                 }`}
               >
-                #{tag}
+                <Hash className="w-3 h-3" />
+                {tag}
               </button>
             ))}
           </div>
+          <div className="text-xs text-muted-foreground">
+            Total objects: {filteredPosts.length}
+          </div>
+        </div>
 
-          {/* Blog Posts List */}
+        {/* File List */}
+        <div className="bg-card border border-border rounded-lg overflow-hidden shadow-sm">
+          {/* List Header */}
+          <div className="grid grid-cols-12 gap-4 px-4 py-2 bg-muted/50 border-b border-border text-xs font-bold text-muted-foreground uppercase tracking-wider">
+            <div className="col-span-2 md:col-span-1">Perms</div>
+            <div className="col-span-2 md:col-span-1">User</div>
+            <div className="col-span-2 md:col-span-1">Size</div>
+            <div className="col-span-3 md:col-span-2">Date</div>
+            <div className="col-span-3 md:col-span-7">Name</div>
+          </div>
+
           {loading ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">Loading posts...</p>
+            <div className="p-8 text-center text-muted-foreground animate-pulse">
+              Loading file system...
             </div>
-          ) : blogPosts.length === 0 ? (
-            <div className="border border-dashed border-border rounded-lg p-16 text-center">
-              <div className="max-w-md mx-auto">
-                <h2 className="text-2xl font-bold mb-3">
-                  No posts published yet
-                </h2>
-                <p className="text-muted-foreground mb-4">
-                  I&apos;m working on sharing my thoughts about engineering,
-                  systems design, and software development best practices.
-                </p>
-                <p className="text-sm text-muted-foreground italic">
-                  Sign up for updates or check back soon!
-                </p>
-              </div>
+          ) : filteredPosts.length === 0 ? (
+            <div className="p-12 text-center">
+              <p className="text-muted-foreground mb-2">Directory is empty.</p>
+              <button
+                onClick={() => setSelectedTag(null)}
+                className="text-primary hover:underline text-sm"
+              >
+                cd .. (Clear filters)
+              </button>
             </div>
           ) : (
-            <div className="space-y-12">
-              {filteredPosts.length > 0 ? (
-                filteredPosts.map((post) => (
-                  <article
-                    key={post.slug}
-                    className="border-b border-border pb-12 last:border-b-0"
-                  >
-                    <Link href={`/blog/${post.slug}`} className="group">
-                      <h2 className="text-3xl font-bold mb-3 group-hover:text-foreground/50 transition-colors">
+            <div className="divide-y divide-border/50">
+              {filteredPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-muted/30 transition-colors group items-center text-sm"
+                >
+                  <div className="col-span-2 md:col-span-1 text-muted-foreground text-xs font-mono">
+                    -rw-r--r--
+                  </div>
+                  <div className="col-span-2 md:col-span-1 text-muted-foreground text-xs">
+                    ilham
+                  </div>
+                  <div className="col-span-2 md:col-span-1 text-muted-foreground text-xs">
+                    {post.readTime}kb
+                  </div>
+                  <div className="col-span-3 md:col-span-2 text-muted-foreground text-xs">
+                    {post.date}
+                  </div>
+                  <div className="col-span-3 md:col-span-7 font-medium group-hover:text-primary transition-colors flex items-center gap-2 truncate">
+                    <FileText className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-primary" />
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="truncate">{post.title}</span>
+                      </TooltipTrigger>
+
+                      <TooltipContent>
                         {post.title}
-                      </h2>
-                    </Link>
-
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <time className="text-sm text-muted-foreground">
-                        {post.date}
-                      </time>
-                      <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs px-3 py-1 bg-muted rounded-full text-muted-foreground"
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                ))
-              ) : (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground">
-                    No posts found with that tag.
-                  </p>
-                </div>
-              )}
+                      </TooltipContent>
+                    </Tooltip>
+                    <span className="hidden md:inline-flex text-xs text-muted-foreground ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {post.tags.slice(0, 3).map((t) => `#${t}`).join(" ")}{post.tags.length > 3 && "..."}
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
         </div>
