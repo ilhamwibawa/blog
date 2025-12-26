@@ -5,6 +5,7 @@ import { Navigation } from "@/components/navigation";
 import { Projects } from "@/components/projects";
 import { WorkExperience } from "@/components/work-experience";
 import { JsonLd } from "@/components/json-ld";
+import { SkillsGraph } from "@/components/skills-graph";
 
 export default function Home() {
   const jsonLd = {
@@ -28,7 +29,9 @@ export default function Home() {
       <main className="min-h-screen bg-background text-foreground">
         <Navigation />
         <Hero />
+
         <WorkExperience />
+        <SkillsGraph />
         <Projects />
         <BlogPreview />
         <Footer />
