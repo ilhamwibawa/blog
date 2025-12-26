@@ -6,6 +6,7 @@ interface Project {
   links: {
     demo?: string;
     github?: string;
+    npm?: string;
   };
 }
 
@@ -19,11 +20,12 @@ const projects: Project[] = [
     technologies: ["TypeScript", "SQLite", "Faker.js", "Node.js"],
     links: {
       github: "https://github.com/ilhamwibawa/mocklite",
+      npm: "https://www.npmjs.com/package/@ilhamwibawa/mocklite",
     },
   },
 ];
 
-import { Github, ExternalLink, Terminal, Code2 } from "lucide-react";
+import { Github, ExternalLink, Terminal, Code2, Package } from "lucide-react";
 
 export function Projects() {
   return (
@@ -89,6 +91,19 @@ export function Projects() {
                           <Github className="w-5 h-5" />
                         </a>
                       )}
+
+                      {project.links.npm && (
+                        <a
+                          href={project.links.npm}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted-foreground hover:text-primary transition-colors"
+                          aria-label="View on NPM"
+                        >
+                          <Package className="w-5 h-5" />
+                        </a>
+                      )}
+
                       {project.links.demo && (
                         <a
                           href={project.links.demo}
