@@ -1,0 +1,107 @@
+---
+title: "Introducing MockLite: Stop Waiting for the Backend"
+date: "2025-12-27"
+excerpt: "Why I built a zero-config, SQLite-powered mock server to solve the pain of missing APIs and static JSON files."
+slug: "introducing-mocklite"
+tags: ["tools", "frontend", "testing", "dx", "sqlite"]
+---
+
+## The "Backend is Not Ready" Problem
+
+We've all been there. You're building a beautiful new frontend feature. The designs are perfect, the components are ready, but there's one problem: **the API doesn't exist yet.**
+
+So, what do you do?
+
+1.  **Hardcode data in components?** Now you have to remember to remove it later.
+2.  **Create a `data.json` file?** It works, but it's static. Lists don't grow, and you can't test "loading" states or error handling easily.
+3.  **Spin up a full Express/Node server?** Suddenly you're maintaining a whole backend just to test a dropdown menu.
+
+I built **MockLite** because I wanted a fourth option: **A mock server that feels like a real backend, but takes zero effort to set up.**
+
+## Meet MockLite
+
+[MockLite](https://www.npmjs.com/package/@mocklite/cli) is a lightweight CLI tool that generates a full REST API from a simple JSON schema. It uses **SQLite** for persistence and **Faker.js** for realistic data generation.
+
+No boilerplate. No controller files. Just config.
+
+### Why I Created It
+
+I needed a tool that solved three specific frustrations I had with existing mock solutions:
+
+#### 1. Static Data isn't "Real" Enough
+
+Most mock servers return the exact same JSON every time. But real apps have thousands of records, pagination, and search.
+
+MockLite uses Faker.js to generate as much data as you need. Want 1,000 users? Just set `"seed": 1000`.
+
+#### 2. I Need to Test "Unhappy" Paths
+
+It's easy to build for the happy path. But how does your app handle a 500 error? Or a 3-second network delay?
+
+Usually, simulating this involves hacking `setTimeout` into your fetch calls. With MockLite, it's just a config switch:
+
+```json
+{
+  "delay": 2000,
+  "errorRate": 0.1
+}
+```
+
+Now your app is "slow" and "unstable," forcing you to build better loading states and error boundaries.
+
+#### 3. Data Should Persist
+
+If I add a "Todo" item in my mocked app, I want it to be there when I refresh the page. In-memory mocks wipe everything on reload. MockLite uses SQLite, so your data survives restarts (unless you choose to re-seed).
+
+## How to Try It
+
+You don't even need to install it permanently. You can run it directly with `npx`.
+
+### 1. Initialize logic
+
+Go to your project folder and run:
+
+```bash
+npx @mocklite/cli init
+```
+
+This creates a `mocklite.config.json` file. It's pre-filled with a sensible default schema (users, posts, etc.) so you can see how it works.
+
+### 2. Customizing Your Schema
+
+Open the config file. You'll see how easy it is to define a "table":
+
+```json
+{
+  "table": "products",
+  "seed": 50,
+  "fields": {
+    "id": "pk",
+    "name": "faker.commerce.productName",
+    "price": "faker.commerce.price",
+    "description": "faker.commerce.productDescription"
+  }
+}
+```
+
+### 3. Start the Server
+
+Run:
+
+```bash
+npx @mocklite/cli start
+```
+
+That's it. You now have a running API at `http://localhost:3000/products` with 50 items, supporting:
+
+- **Pagination**: `?page=1&limit=10`
+- **Search**: `?name=Soft`
+- **Filtering**: `?price=100`
+
+## Give It a Spin
+
+MockLite was born out of a desire to keep moving fast, even when the backend team is blocked. It's free, open-source, and designed to make your dev experience smoother.
+
+Check it out on npm: **[@mocklite/cli](https://www.npmjs.com/package/@mocklite/cli)**
+
+Happy hacking!
