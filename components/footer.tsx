@@ -68,7 +68,7 @@ export function Footer() {
                 ssh linkedin
               </a>
               <a
-                href="mailto:hello@ilhamwibawa.com"
+                href="mailto:ilhiamwibawaa@gmail.com"
                 className="block text-muted-foreground hover:text-primary transition-colors hover:translate-x-1 duration-200"
               >
                 mail -s "Hello"
