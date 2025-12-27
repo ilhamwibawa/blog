@@ -38,13 +38,13 @@ export function Navigation() {
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-8 items-center text-sm">
           <Link
-            href="#work"
+            href="/#work"
             className="hover:text-primary transition-colors hover:underline decoration-2 underline-offset-4"
           >
             ~/work
           </Link>
           <Link
-            href="#projects"
+            href="/#projects"
             className="hover:text-primary transition-colors hover:underline decoration-2 underline-offset-4"
           >
             ~/projects
@@ -93,14 +93,14 @@ export function Navigation() {
         <div className="md:hidden border-b-2 border-border bg-background font-mono">
           <div className="px-6 py-4 flex flex-col gap-4">
             <Link
-              href="#work"
+              href="/#work"
               className="hover:text-primary transition-colors flex items-center gap-2"
               onClick={() => setIsOpen(false)}
             >
               <span className="text-primary">&gt;</span> cd ~/work
             </Link>
             <Link
-              href="#projects"
+              href="/#projects"
               className="hover:text-primary transition-colors flex items-center gap-2"
               onClick={() => setIsOpen(false)}
             >
