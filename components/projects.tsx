@@ -20,7 +20,7 @@ const projects: Project[] = [
     technologies: ["TypeScript", "SQLite", "Faker.js", "Node.js"],
     links: {
       github: "https://github.com/ilhamwibawa/mocklite",
-      npm: "https://www.npmjs.com/package/@ilhamwibawa/mocklite",
+      npm: "https://www.npmjs.com/package/@mocklite/cli",
     },
   },
 ];
