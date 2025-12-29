@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { TerminalModal } from "@/components/terminal-modal";
+import { ConsoleWelcome } from "@/components/console-welcome";
 import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
@@ -86,6 +87,7 @@ export default function RootLayout({
       >
         {children}
         <TerminalModal />
+        <ConsoleWelcome />
 
         <Analytics />
       </body>

@@ -142,10 +142,10 @@ export function TerminalModal() {
             <p>
               Email:{" "}
               <a
-                href="mailto:hello@ilhamwibawa.com"
+                href="mailto:ilhamwibawaa@gmail.com"
                 className="text-primary hover:underline"
               >
-                hello@ilhamwibawa.com
+                ilhamwibawaa@gmail.com
               </a>
             </p>
             <p>
@@ -231,7 +231,7 @@ export function TerminalModal() {
             </div>
             <span className="ml-3 text-xs text-muted-foreground flex items-center gap-1">
               <Terminal className="w-3 h-3" />
-              guest@ilhamwibawa.com:~
+              guest@ilhamwibawa.vercel.app:~
             </span>
           </div>
           <div className="text-xs text-muted-foreground">zsh</div>
