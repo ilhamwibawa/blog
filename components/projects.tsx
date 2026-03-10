@@ -23,6 +23,18 @@ const projects: Project[] = [
       npm: "https://www.npmjs.com/package/@mocklite/cli",
     },
   },
+  {
+    name: "SidePanel Browser Extension",
+    description:
+      "A mini browser in Chrome's side panel. Browse, search, and multitask without switching tabs. Perfect for research and reference.",
+    story:
+      "I created this browser extension to solve the problem of constantly switching between tabs while researching or referencing information. The side panel allows me to keep multiple resources open and easily accessible without cluttering my main browser window.",
+    technologies: ["TypeScript", "React", "Chrome Extensions API"],
+    links: {
+      github: "https://github.com/ilhamwibawa/sidepanel-extension",
+      demo: "https://chromewebstore.google.com/detail/sidepanel-browser/jlhpdjlheiegpaipcgkbampjpcdebfeo",
+    },
+  }
 ];
 
 import { Github, ExternalLink, Terminal, Code2, Package } from "lucide-react";
