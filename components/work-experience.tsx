@@ -1,6 +1,6 @@
 import { Terminal, Cpu, Network, Server, Code } from "lucide-react";
 
-interface Experience {
+export interface Experience {
   company: string;
   role: string;
   period: string;
@@ -16,7 +16,7 @@ interface Experience {
   pid: number;
 }
 
-const experiences: Experience[] = [
+export const experiences: Experience[] = [
   {
     company: "SmartM2M Co., Ltd.",
     role: "Senior Software Engineer",
@@ -60,6 +60,11 @@ const experiences: Experience[] = [
         details:
           "Developed a fullstack Besu-based BaaS platform enabling users to create private networks, manage nodes, configure consensus (IBFT2/QBFT), and monitor network health through a clean, intuitive UI.",
       },
+      {
+        title: "AI Pentesting Platform",
+        details:
+          "Developing a next-generation automated AI pentesting platform. Leading the core platform architecture and frontend implementation to enable seamless security testing workflows.",
+      },
     ],
   },
   {
@@ -69,7 +74,7 @@ const experiences: Experience[] = [
     status: "TERMINATED",
     pid: 3000,
     description:
-      "Focused on developing and improving internal back-office web applications supporting loan operations, administrative workflows, and internal management tools. Contributed to UI/UX enhancements and helped strengthen the company’s design system initiative.",
+      "Specialized in the development and enhancement of mission-critical internal back-office applications supporting core loan operations. Collaborated on cross-team engineering initiatives to standardize the frontend architecture.",
     technologies: [
       "PHP",
       "JavaScript",
@@ -83,10 +88,9 @@ const experiences: Experience[] = [
       "Git",
     ],
     highlights: [
-      "Maintained and enhanced internal back-office apps for loan management and administrative processes.",
-      "Developed management interfaces used daily by operational and support teams.",
-      "Contributed to the company&apos;s design system and component standardization efforts.",
-      "Implemented responsive UI components, improving usability across multiple internal tools.",
+      "Developed and shipped new features for highly crucial internal back-office applications, streamlining daily loan management operations and administrative workflows.",
+      "Collaborated closely with the broader frontend engineering team to architect and build a scalable, React-based Design System from scratch.",
+      "Contributed to UI component standardization efforts aimed at improving code reusability, development speed, and visual consistency across the company's internal tools.",
     ],
   },
 
@@ -97,7 +101,7 @@ const experiences: Experience[] = [
     status: "TERMINATED",
     pid: 8000,
     description:
-      "Maintained and improved client-side applications across multiple marketplace platforms. Developed core features including form generation, provider profiles, and UI enhancements while supporting a gradual migration to modern frontend tooling.",
+      "Focused exclusively on client-side engineering across multiple marketplace platforms. Spearheaded UI/UX improvements and drove the technical migration from legacy architectures to modern, reactive frameworks.",
     technologies: [
       "JavaScript",
       "Vue.js",
@@ -107,10 +111,9 @@ const experiences: Experience[] = [
       "Git",
     ],
     highlights: [
-      "Maintained frontend applications across Sejasa.com, Recommend.my, and Helpdee.com.",
-      "Built dynamic form generator system for service request workflows.",
-      "Developed provider profile pages and implemented new frontend UI designs.",
-      "Worked with Ruby on Rails templates (.rb, .slim) and supported migration to Vue.js.",
+      "Engineered a highly dynamic client-side form rendering engine that seamlessly interpreted configurations from an admin form builder, drastically reducing the development time for complex, service-specific request forms.",
+      "Played a key role in the architectural migration from a traditional, jQuery-based codebase to Vue.js, establishing a scalable and reactive modern frontend ecosystem.",
+      "Continuously delivered UI/UX enhancements and maintained high-traffic frontend applications across three major regional platforms: Sejasa.com, Recommend.my, and Helpdee.com.",
     ],
   },
   {
@@ -120,13 +123,12 @@ const experiences: Experience[] = [
     status: "TERMINATED",
     pid: 443,
     description:
-      "Served as a full-stack developer responsible for maintaining, extending, and improving Laravel-based web applications. Worked on both backend API development and frontend implementation to support business operations.",
+      "Acted as the primary full-stack developer managing the end-to-end delivery of diverse client projects. Demonstrated strong versatility by successfully building and shipping a wide variety of web applications tailored to complex business requirements.",
     technologies: ["PHP", "Laravel", "JavaScript", "jQuery"],
     highlights: [
-      "Maintained and enhanced existing PHP/Laravel web applications.",
-      "Built RESTful APIs and implemented frontend interfaces within the Laravel ecosystem.",
-      "Handled end-to-end development from backend logic to UI implementation.",
-      "Managed feature development, bug fixing, and long-term application maintenance.",
+      "Engineered multiple high-complexity web platforms from scratch, including custom e-commerce systems, corporate portals, and feature-rich Learning Management Systems (LMS) with live video streaming capabilities.",
+      "Took full ownership of the software development lifecycle as a solo developer for most projects, while collaborating effectively within agile teams for large-scale enterprise solutions.",
+      "Consistently delivered scalable and robust backend architectures alongside responsive user interfaces using the PHP/Laravel ecosystem.",
     ],
   },
   {

@@ -85,10 +85,10 @@ export default async function BlogPost({
     author: {
       "@type": "Person",
       name: "Ilham Wibawa",
-      url: "https://ilhamwibawa.com",
+      url: "https://ilhamwibawa.vercel.app",
     },
     keywords: post.tags.join(", "),
-    url: `https://ilhamwibawa.com/blog/${post.slug}`,
+    url: `https://ilhamwibawa.vercel.app/blog/${post.slug}`,
   };
 
   return (

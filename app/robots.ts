@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://ilhamwibawa.com/sitemap.xml",
+    sitemap: "https://ilhamwibawa.vercel.app/sitemap.xml",
   };
 }

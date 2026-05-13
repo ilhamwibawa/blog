@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ilhamwibawa.com"),
+  metadataBase: new URL("https://ilhamwibawa.vercel.app"),
   alternates: {
     canonical: "/",
   },
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "Ilham Wibawa - Software Engineer",
     description:
       "Software engineer specializing in building scalable systems, blockchain, and modern web applications.",
-    url: "https://ilhamwibawa.com",
+    url: "https://ilhamwibawa.vercel.app",
     siteName: "Ilham Wibawa",
     locale: "en_US",
     type: "website",

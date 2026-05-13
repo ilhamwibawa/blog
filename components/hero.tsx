@@ -12,9 +12,7 @@ export function Hero() {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 text-balance leading-tight font-mono tracking-tighter">
           <span className="text-primary mr-4">&gt;</span>
           Building systems <br className="hidden md:block" />
-          that <span className="bg-primary/10 px-2 text-primary">
-            matter
-          </span>.
+          that <span className="bg-primary/10 px-2 text-primary">matter</span>.
         </h1>
 
         <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-center">
@@ -40,11 +38,11 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="/blog"
-                className="group px-6 py-3 bg-background border-2 border-border text-foreground rounded-md hover:bg-muted transition-all duration-200 font-medium flex items-center gap-2"
+                href="/cv"
+                className="group px-6 py-3  rounded-md hover:opacity-90 transition-all duration-200 font-medium flex items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none border border-primary"
               >
                 <FileText className="w-4 h-4" />
-                <span>cat ./thoughts.md</span>
+                <span>cat ./cv.md</span>
               </a>
             </div>
           </div>
@@ -71,9 +69,9 @@ export function Hero() {
               <div className="flex justify-between">
                 <span>Stack</span>
                 <span className="text-foreground">
-                  <span className="text-blue-500">Typescript</span>
-                  , <span className="text-blue-500">Python</span>
-                  , <span className="text-blue-500">PHP</span>
+                  <span className="text-blue-500">Typescript</span>,{" "}
+                  <span className="text-blue-500">Python</span>,{" "}
+                  <span className="text-blue-500">PHP</span>
                 </span>
               </div>
               <div className="flex justify-between">

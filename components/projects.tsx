@@ -1,4 +1,4 @@
-interface Project {
+export interface Project {
   name: string;
   description: string;
   story: string;
@@ -10,7 +10,18 @@ interface Project {
   };
 }
 
-const projects: Project[] = [
+export const projects: Project[] = [
+  {
+    name: "Solara",
+    description:
+      "All-in-one booking and business management platform designed specifically for Makeup Artists (MUA).",
+    story:
+      "I built this for my wife to help manage her MUA bookings. It worked so well for her that I decided to launch it publicly. Now, it's used by over 100 MUAs to run their daily operations.",
+    technologies: ["TypeScript", "React", "Tailwind CSS", "Hono", "PWA"],
+    links: {
+      demo: "https://www.jetra.id/solara",
+    },
+  },
   {
     name: "MockLite",
     description:

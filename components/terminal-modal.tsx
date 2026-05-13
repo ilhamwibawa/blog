@@ -88,7 +88,7 @@ export function TerminalModal() {
       case "whoami":
         output = (
           <div className="text-muted-foreground">
-            <p>User: guest@ilhamwibawa.com</p>
+            <p>User: guest@ilhamwibawa.vercel.app</p>
             <p>Role: Visitor</p>
             <p>Access Level: Read Only</p>
             <p className="mt-2">

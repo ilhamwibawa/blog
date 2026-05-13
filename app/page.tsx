@@ -5,14 +5,14 @@ import { Navigation } from "@/components/navigation";
 import { Projects } from "@/components/projects";
 import { WorkExperience } from "@/components/work-experience";
 import { JsonLd } from "@/components/json-ld";
-import { SkillsGraph } from "@/components/skills-graph";
+
 
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Ilham Wibawa",
-    url: "https://ilhamwibawa.com",
+    url: "https://ilhamwibawa.vercel.app",
     jobTitle: "Software Engineer",
     description:
       "Software engineer specializing in building scalable systems, blockchain, and modern web applications.",
@@ -31,7 +31,7 @@ export default function Home() {
         <Hero />
 
         <WorkExperience />
-        <SkillsGraph />
+
         <Projects />
         <BlogPreview />
         <Footer />
